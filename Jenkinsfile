@@ -31,12 +31,12 @@ pipeline {
         }
          stage('Archive Artifacts') {
             steps {
-                 archiveArtifacts artifacts: '/*.war', followSymlinks: false
+                 archiveArtifacts artifacts: '**/*.war', followSymlinks: false
              }
          }
         stage('Deploy') {
             steps {
-             deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'Fortest', war: '/*war'
+             deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'Fortest', war: '**/*war'
             }
         }
     }
