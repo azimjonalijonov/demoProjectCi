@@ -46,10 +46,16 @@ maven 'maven'
                  archiveArtifacts artifacts: '*.war', followSymlinks: false
              }
          }
+        // stage('Deploy') {
+        //     steps {
+        //      deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'Fortest', war: '**/*war'
+        //     }
+        // }
         stage('Deploy') {
-            steps {
-             deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'Fortest', war: '**/*war'
-            }
-        }
+    steps {
+        deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'fortest', war: 'target/*.war'
+    }
+}
+
     }
 }
