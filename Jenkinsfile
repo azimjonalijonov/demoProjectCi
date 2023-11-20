@@ -48,7 +48,7 @@ maven 'maven'
          }
         stage('Deploy') {
             steps {
-             deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'Fortest', war: '**/*war'
+             deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'fortest', war: '**/*war'
             }
         }
 //         stage('Deploy') {
