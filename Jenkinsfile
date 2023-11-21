@@ -41,48 +41,15 @@ maven 'maven'
 //     }
 // }
 
-         stage('Archive Artifacts') {
-            steps {
-                 archiveArtifacts artifacts: 'target/**/*.jar', followSymlinks: false
-             }
-         }
+
+
         stage('Deploy') {
-    steps {
-        script {
-            def cargoConfig = [
-                containerId: 'tomcat9',
-                credentialsId: 'tomcatadmin',
-                containerUrl: 'http://localhost:8181/'
-            ]
-            
-            def deployConfig = [
-                war: 'target/*.jar',
-                contextPath: '/'
-            ]
-            
-            def cargo = com.cloudbees.plugins.credentials.CredentialsMatchers.firstOrNull(
-                com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
-                    com.cloudbees.plugins.credentials.common.StandardUsernameCredentials.class,
-                    Jenkins.getInstance(),
-                    null,
-                    null
-                ),
-                com.cloudbees.plugins.credentials.CredentialsMatchers.withId('tomcatadmin')
-            )
-            
-            def deployer = new org.jenkinsci.plugins.deploy.weblogic.deployers.DeployPublisher(cargoConfig, deployConfig, cargo)
-            deployer.deploy()
+            steps {
+        deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/*.jar'
+
+                // deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/**/*.war'
         }
+
     }
-}
-
-    //     stage('Deploy') {
-    //         steps {
-    //     deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/*.jar'
-
-    //             // deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/**/*.war'
-    //     }
-
-    // }
     }
 }
