@@ -50,11 +50,6 @@ maven 'maven'
             steps {
                 deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/**/*.jar'
         }
-//         stage('Deploy') {
-//     steps {
-//         deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'fortest', jar: 'target/*.jar'
-//     }
-// }
 
     }
-}
+
