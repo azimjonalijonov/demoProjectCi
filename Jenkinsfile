@@ -48,11 +48,11 @@ maven 'maven'
          }
         stage('Deploy') {
             steps {
-deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: 'fortest', onFailure: false, war: '**/*.war'            }
+deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: 'fortest', onFailure: false, jar: '**/*.jar'            }
         }
 //         stage('Deploy') {
 //     steps {
-//         deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'fortest', war: 'target/*.war'
+//         deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181')], contextPath: 'fortest', jar: 'target/*.jar'
 //     }
 // }
 
