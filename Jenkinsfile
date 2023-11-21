@@ -29,6 +29,12 @@ maven 'maven'
                 }
             }
         }
+        stage('Archive Artifacts') {
+    steps {
+        archiveArtifacts artifacts: 'target/**/*.war', followSymlinks: false
+    }
+}
+
 //         stage('Debug Workspace') {
 //     steps {
 //         script {
@@ -45,7 +51,7 @@ maven 'maven'
 
         stage('Deploy') {
             steps {
-        deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/*.jar'
+        deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/*.war'
 
                 // deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/**/*.war'
         }
