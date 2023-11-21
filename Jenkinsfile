@@ -43,7 +43,7 @@ maven 'maven'
 
          stage('Archive Artifacts') {
             steps {
-                 archiveArtifacts artifacts: '/*.war', followSymlinks: false
+                 archiveArtifacts artifacts: '**/*.war', followSymlinks: false
              }
          }
         stage('Deploy') {
