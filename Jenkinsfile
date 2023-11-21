@@ -1,8 +1,72 @@
 
+// pipeline {
+//     agent any
+//     tools {
+// maven 'maven'
+//     }
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 checkout scm
+//             }
+//         }
+//         stage('Test') {
+//             steps { bat 'mvn test' }
+//         }
+//         stage('Build') {
+//             steps { bat 'mvn clean install' }
+//         }
+//         stage('Code Coverage') {
+//             steps {
+//                 bat 'mvn clean test'
+//                 bat 'mvn jacoco:report'
+//             }
+//         }
+//        stage('Scan') {
+//             steps {
+//                 withSonarQubeEnv(installationName: 'fortest'){
+//                     bat 'mvn clean verify sonar:sonar'
+//                 }
+//             }
+//         }
+//         stage('Archive Artifacts') {
+//     steps {
+//         archiveArtifacts artifacts: 'target/**/*.war', followSymlinks: false
+//     }
+// }
+
+// //         stage('Debug Workspace') {
+// //     steps {
+// //         script {
+// //             // Print the current workspace location
+// //             echo "Current Workspace: ${env.WORKSPACE}"
+
+// //             // List the contents of the workspace
+// //             bat 'dir /s'
+// //         }
+// //     }
+// // }
+
+
+
+//         stage('Deploy') {
+//             steps {
+//         deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: 'test', war: 'target/*.war'
+
+//          }
+
+//     }
+//     }
+// }
+
 pipeline {
     agent any
     tools {
-maven 'maven'
+        maven 'maven'
+    }
+    options {
+        buildDiscarder(logRotator(artifactDaysToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5', artifactNumToKeepStr: '5'))
+        displayName 'MyCiCdTaskProject'
     }
     stages {
         stage('Checkout') {
@@ -11,10 +75,14 @@ maven 'maven'
             }
         }
         stage('Test') {
-            steps { bat 'mvn test' }
+            steps { 
+                bat 'mvn test' 
+            }
         }
         stage('Build') {
-            steps { bat 'mvn clean install' }
+            steps { 
+                bat 'mvn clean install' 
+            }
         }
         stage('Code Coverage') {
             steps {
@@ -22,7 +90,7 @@ maven 'maven'
                 bat 'mvn jacoco:report'
             }
         }
-       stage('Scan') {
+        stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'fortest'){
                     bat 'mvn clean verify sonar:sonar'
@@ -30,31 +98,14 @@ maven 'maven'
             }
         }
         stage('Archive Artifacts') {
-    steps {
-        archiveArtifacts artifacts: 'target/**/*.war', followSymlinks: false
-    }
-}
-
-//         stage('Debug Workspace') {
-//     steps {
-//         script {
-//             // Print the current workspace location
-//             echo "Current Workspace: ${env.WORKSPACE}"
-
-//             // List the contents of the workspace
-//             bat 'dir /s'
-//         }
-//     }
-// }
-
-
-
+            steps {
+                archiveArtifacts artifacts: 'target/**/*.war', followSymlinks: false
+            }
+        }
         stage('Deploy') {
             steps {
-        deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: 'test', war: 'target/*.war'
-
-         }
-
-    }
+                deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: 'mytest', war: 'target/*.war'
+            }
+        }
     }
 }
