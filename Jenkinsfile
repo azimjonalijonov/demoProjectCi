@@ -43,12 +43,12 @@ maven 'maven'
 
          stage('Archive Artifacts') {
             steps {
-                 archiveArtifacts artifacts: 'target/**/*.jar', followSymlinks: false
+                 archiveArtifacts artifacts: 'target/**/*.war', followSymlinks: false
              }
          }
         stage('Deploy') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/**/*.jar'
+                deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/**/*.war'
         }
 
     }
