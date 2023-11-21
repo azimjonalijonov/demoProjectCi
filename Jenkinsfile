@@ -51,10 +51,9 @@ maven 'maven'
 
         stage('Deploy') {
             steps {
-        deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: 'demo-0.0.1-SNAPSHOT', war: 'target/*.war'
+        deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: 'ROOT', war: 'target/*.war'
 
-                // deploy adapters: [tomcat9(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8181/')], contextPath: null, war: 'target/**/*.war'
-        }
+         }
 
     }
     }
