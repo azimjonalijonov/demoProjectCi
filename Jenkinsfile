@@ -64,9 +64,7 @@ pipeline {
     tools {
         maven 'maven'
     }
-    options {
-        displayName 'MyCiCdTaskProject'
-    }
+
     stages {
         stage('Checkout') {
             steps {
