@@ -29,17 +29,17 @@ maven 'maven'
                 }
             }
         }
-        stage('Debug Workspace') {
-    steps {
-        script {
-            // Print the current workspace location
-            echo "Current Workspace: ${env.WORKSPACE}"
+//         stage('Debug Workspace') {
+//     steps {
+//         script {
+//             // Print the current workspace location
+//             echo "Current Workspace: ${env.WORKSPACE}"
 
-            // List the contents of the workspace
-            bat 'dir /s'
-        }
-    }
-}
+//             // List the contents of the workspace
+//             bat 'dir /s'
+//         }
+//     }
+// }
 
          stage('Archive Artifacts') {
             steps {
