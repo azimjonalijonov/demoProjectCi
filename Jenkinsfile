@@ -65,7 +65,6 @@ pipeline {
         maven 'maven'
     }
     options {
-        buildDiscarder(logRotator(artifactDaysToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5', artifactNumToKeepStr: '5'))
         displayName 'MyCiCdTaskProject'
     }
     stages {
