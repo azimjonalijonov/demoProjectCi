@@ -1,15 +1,35 @@
 package com.example.demo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-class ForTestTest {
-    @org.junit.jupiter.api.Test
-    void testAdd() {
-         ForTest forTest = new ForTest();
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-         int result = forTest.add(2, 3);
+public class ForTestTest {
 
-         assertEquals(5, result, "Adding 2 and 3 should equal 5");
+    @InjectMocks
+    private ForTest forTest;
+
+    @Mock
+    private ResultRepository repository;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
     }
 
+    @Test
+    public void testAdd() {
+         long a = 5;
+        int b = 3;
+        ResultEntity result = forTest.add(a, b);
+
+         assertNotNull(result);
+        verify(repository, times(1)).save(any(ResultEntity.class));
+    }
 }

@@ -1,10 +1,7 @@
  
 
 pipeline {
-   environment {
-        PROJECT_NAME = 'Your Project Name'
-    }
-
+   
  agent any
     tools {
         maven 'maven'
